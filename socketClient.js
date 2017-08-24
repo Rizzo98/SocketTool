@@ -23,7 +23,7 @@ function updateList(){
      if(data != ''){
        object = JSON.parse(data);
        object.list.forEach(function(el){
-         $("#list li:last").after('<li class="list-group-item elm">'+ el.name +'<div class="vcenter text-right"><button type="button" class="btn center send" id='+el.addr+'>Send</button></div></li>');
+         $("#list li:last").after('<li class="list-group-item elm">'+ el.name +'<div class="vcenter text-right"><button type="button" class="btn center send" id='+el.addr+'><span class="glyphicon glyphicon-share"></span></button></div></li>');
        })
      }
    }});

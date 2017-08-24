@@ -1,0 +1,9 @@
+.vcenter {
+   display: inline-block;
+   vertical-align: middle;
+   float: right;
+ }
+
+ .center {
+   margin-top: -7px;
+ }
