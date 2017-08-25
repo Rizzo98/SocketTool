@@ -16,7 +16,7 @@ let shown = false;
 function createWindow () {
   // Create the browser window.
   mousePos = electron.screen.getCursorScreenPoint();
-  win = new BrowserWindow({width : 300, height : 300,alwaysOnTop : true, show : false, frame : false, x : mousePos.x, y : mousePos.y})
+  win = new BrowserWindow({width : 400, height : 400,alwaysOnTop : true, show : false, frame : false, x : mousePos.x, y : mousePos.y})
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'app.html'),
