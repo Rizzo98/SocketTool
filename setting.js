@@ -9,6 +9,7 @@ $( '.folder' ).each( function()
 		$input.on( 'change', function( e )
 		{
       console.log(e.target.files[0].path)
+			$('#path').val(e.target.files[0].path)
 
 		});
 });
