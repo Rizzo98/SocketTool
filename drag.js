@@ -1,5 +1,7 @@
 var holder = document.getElementById('drag-file');
 var model = require('./viewModels/dragModel.js');
+var $ = require('jQuery');
+
 
 holder.ondragover = () => {
     return false;
@@ -22,3 +24,7 @@ holder.ondrop = (e) => {
 
     return false;
 };
+
+$('#setting').click(function(){
+  model.setting();
+})

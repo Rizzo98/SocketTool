@@ -4,7 +4,7 @@ var spa = null;
           if (document.readyState == "complete") {
                var sauna = require("./libs/sauna");
                spa = sauna(document.getElementById("app"));
-               spa.n.navigate("views/setting"); 
+               spa.n.navigate("views/drag"); 
           }
      };
 })();

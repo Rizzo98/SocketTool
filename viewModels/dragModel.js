@@ -10,3 +10,7 @@ module.exports = function () {
 exports.changeRoute = function(url){
 		spa.n.navigate("views/list",url);
 }
+
+exports.setting = function(){
+	spa.n.navigate("views/setting")
+}

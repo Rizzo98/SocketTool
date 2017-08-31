@@ -1,4 +1,6 @@
 var $ = require('jQuery');
+var keyConverter = require('./keyConverter.js')
+
 var key1 = false
 var key2 = false
 var key3 = false
@@ -29,18 +31,24 @@ $('input[type=radio][name=radioKey]').change(function(e) {
 $('#btnkey1').click(function(){
 	key1 = true
 	$('#btnkey1').addClass('btn-info')
+	$('#name').prop('disabled',true)
+	$('#file').prop('disabled',true)
 
 })
 
 $('#btnkey2').click(function(){
 	key2 = true
 	$('#btnkey2').addClass('btn-info')
+	$('#name').prop('disabled',true)
+	$('#file').prop('disabled',true)
 
 })
 
 $('#btnkey3').click(function(){
 	key3 = true
 	$('#btnkey3').addClass('btn-info')
+	$('#name').prop('disabled',true)
+	$('#file').prop('disabled',true)
 
 })
 
@@ -53,7 +61,8 @@ $('body').keydown(function(e){
 	}
 
 	if (key2==true){
-		alert(e.key)
+		alert(keyConverter.convertKey(e.keyCode))
+		//alert(e.keyCode)
 		$('#btnkey2').removeClass('btn-info')
 		key2=false
 	}
@@ -63,4 +72,6 @@ $('body').keydown(function(e){
 		$('#btnkey3').removeClass('btn-info')
 		key3=false
 	}
+	$('#name').prop('disabled',false)
+	$('#file').prop('disabled',false)
 });
