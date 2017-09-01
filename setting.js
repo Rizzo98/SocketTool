@@ -1,9 +1,18 @@
 var $ = require('jQuery');
 var keyConverter = require('./keyConverter.js')
+var conf = require('./readConf.js')
 
 var key1 = false
 var key2 = false
 var key3 = false
+
+conf.getName(function(x){
+	$('#name').val(x)
+})
+
+conf.getFolder(function(x){
+	$('#path').val(x)
+})
 
 $( '.folder' ).each( function()
 	{
@@ -13,11 +22,14 @@ $( '.folder' ).each( function()
 
 		$input.on( 'change', function( e )
 		{
-      console.log(e.target.files[0].path)
 			$('#path').val(e.target.files[0].path)
-
 		});
 });
+
+$('#confirm').click(function(){
+	conf.setFolder($('#path').val(),()=>{});
+	conf.setName($('#name').val(),()=>{})
+})
 
 $('input[type=radio][name=radioKey]').change(function(e) {
 		if(this.id=='key2'){
