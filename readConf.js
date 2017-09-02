@@ -49,7 +49,7 @@ exports.setName = function(name,cb){
     } else {
       if(data != ''){
         object = JSON.parse(data);
-        object.name = path;
+        object.name = name;
         var json = JSON.stringify(object);
         fs.writeFile('config.json',json,'utf8', () => {cb()});
       }

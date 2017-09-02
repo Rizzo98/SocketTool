@@ -27,8 +27,9 @@ $( '.folder' ).each( function()
 });
 
 $('#confirm').click(function(){
-	conf.setFolder($('#path').val(),()=>{});
-	conf.setName($('#name').val(),()=>{})
+	conf.setName($('#name').val(),()=>{
+		conf.setFolder($('#path').val(),()=>{});
+	})
 })
 
 $('input[type=radio][name=radioKey]').change(function(e) {
