@@ -167,7 +167,7 @@ exports.convertKey = function(keyCode){
       break;
 
     case 17:
-      return 'CommandOrControl'
+      return 'CmdOrCtrl'
       break;
 
     case 18:
@@ -206,7 +206,7 @@ exports.convertKey = function(keyCode){
       return 'Escape'
       break;
 
-    default : -1  
+    default : -1
 
   }
 }

@@ -16,7 +16,7 @@ let shown = false;
 function createWindow () {
   // Create the browser window.
   mousePos = electron.screen.getCursorScreenPoint();
-  win = new BrowserWindow({width : 400, height : 400,alwaysOnTop : true, show : false, frame : false, x : mousePos.x, y : mousePos.y})
+  win = new BrowserWindow({width : 800, height : 400,alwaysOnTop : true, show : false, frame : false, x : mousePos.x, y : mousePos.y})
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'app.html'),
@@ -26,7 +26,7 @@ function createWindow () {
 
 
   // Open the DevTools.
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -67,7 +67,7 @@ exports.changePage = function(){
 // Some APIs can only be used after this event occurs.
 app.on('ready',() =>{
   createWindow()
-  globalShortcut.register('CommandOrControl+Shift+X', () => {
+  globalShortcut.register('CmdOrCtrl+Shift+X', () => {
     if(shown == false){
       win.show();
       show = true

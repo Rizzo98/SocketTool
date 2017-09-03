@@ -5,6 +5,7 @@ var conf = require('./readConf.js')
 var key1 = false
 var key2 = false
 var key3 = false
+var newKeys = [-1,-1,-1]
 
 conf.getName(function(x){
 	$('#name').val(x)
@@ -12,6 +13,15 @@ conf.getName(function(x){
 
 conf.getFolder(function(x){
 	$('#path').val(x)
+})
+
+conf.getKeys(function(x){
+	arr = x.split('+')
+	$('#btnkey1').html(arr[0])
+	$('#btnkey2').html(arr[1])
+	if(arr.length==3){
+		$('#btnkey3').html(arr[2])
+	}
 })
 
 $( '.folder' ).each( function()
@@ -28,7 +38,10 @@ $( '.folder' ).each( function()
 
 $('#confirm').click(function(){
 	conf.setName($('#name').val(),()=>{
-		conf.setFolder($('#path').val(),()=>{});
+		conf.setFolder($('#path').val(),()=>{
+
+			conf.setKeys('',()=>{})
+		});
 	})
 })
 
@@ -68,20 +81,22 @@ $('#btnkey3').click(function(){
 
 $('body').keydown(function(e){
 	if (key1==true){
-		alert(e.key)
+		newKeys[0] = keyConverter.convertKey(e.keyCode)
+		$('#btnkey1').html(keyConverter.convertKey(e.keyCode))
 		$('#btnkey1').removeClass('btn-info')
 		key1=false
 	}
 
 	if (key2==true){
-		alert(keyConverter.convertKey(e.keyCode))
-		//alert(e.keyCode)
+		newKeys[1] = keyConverter.convertKey(e.keyCode)
+		$('#btnkey2').html(keyConverter.convertKey(e.keyCode))
 		$('#btnkey2').removeClass('btn-info')
 		key2=false
 	}
 
 	if (key3==true){
-		alert(e.key)
+		newKeys[2] = keyConverter.convertKey(e.keyCode)
+		$('#btnkey3').html(keyConverter.convertKey(e.keyCode))
 		$('#btnkey3').removeClass('btn-info')
 		key3=false
 	}
