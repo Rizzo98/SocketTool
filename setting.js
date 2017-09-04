@@ -5,7 +5,7 @@ var conf = require('./readConf.js')
 var key1 = false
 var key2 = false
 var key3 = false
-var newKeys = [-1,-1,-1]
+var newKeys = []
 
 conf.getName(function(x){
 	$('#name').val(x)
@@ -19,8 +19,11 @@ conf.getKeys(function(x){
 	arr = x.split('+')
 	$('#btnkey1').html(arr[0])
 	$('#btnkey2').html(arr[1])
+	newKeys.push(arr[0])
+	newKeys.push(arr[1])
 	if(arr.length==3){
 		$('#btnkey3').html(arr[2])
+		newKeys.push(arr[2])
 	}
 })
 
@@ -39,8 +42,11 @@ $( '.folder' ).each( function()
 $('#confirm').click(function(){
 	conf.setName($('#name').val(),()=>{
 		conf.setFolder($('#path').val(),()=>{
-
-			conf.setKeys('',()=>{})
+			var s =newKeys[0];
+			for (i = 1; i < newKeys.length; i++) {
+					s += '+' + newKeys[i];
+			}
+			conf.setKeys(s,()=>{})
 		});
 	})
 })
@@ -50,6 +56,7 @@ $('input[type=radio][name=radioKey]').change(function(e) {
 			$('#btnkey3').prop('disabled',true)
 		}else if(this.id=='key3'){
 			$('#btnkey3').prop('disabled',false)
+			$('#btnkey3').trigger('click')
 		}
 });
 
