@@ -6,6 +6,7 @@ const start = require('./start.js');
 const dgram = require('./dgram.js')
 const storage = require('./storage.js');
 const socket = require('./socket.js')
+const conf = require('./readConf.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -67,14 +68,16 @@ exports.changePage = function(){
 // Some APIs can only be used after this event occurs.
 app.on('ready',() =>{
   createWindow()
-  globalShortcut.register('CmdOrCtrl+Shift+X', () => {
-    if(shown == false){
-      win.show();
-      show = true
-    }else if(shown == true){
-      win.hide();
-      show = false
-    }
+  conf.getKeys(function(x){
+    globalShortcut.register(x, () => {
+      if(shown == false){
+        win.show();
+        show = true
+      }else if(shown == true){
+        win.hide();
+        show = false
+      }
+    })
   })
 
 })

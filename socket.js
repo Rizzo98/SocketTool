@@ -1,20 +1,14 @@
 var io = require('socket.io')();
 var fs = require('fs');
+const conf = require('./readConf.js')
+
 
 io.on('connection', function(socket){
 
-    socket.on('inviami', (data) =>{
-      fs.readFile('music.mp3',(err,datas) =>{
-          fs.writeFile('server.mp3',datas, (error) =>{
-              console.log(datas)
-          });
-          socket.emit('ricevimi',datas);
-      });
-    })
-
     socket.on('send',(d) =>{
-      fs.writeFile(d.name,toBuffer(d.data), (error) =>{
-
+      conf.getFolder(function(x){
+        path = x+d.name
+        fs.writeFile(path,toBuffer(d.data), (error) =>{})
       })
     })
 

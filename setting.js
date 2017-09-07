@@ -6,6 +6,7 @@ var key1 = false
 var key2 = false
 var key3 = false
 var newKeys = []
+var keysNumber;
 
 conf.getName(function(x){
 	$('#name').val(x)
@@ -21,9 +22,14 @@ conf.getKeys(function(x){
 	$('#btnkey2').html(arr[1])
 	newKeys.push(arr[0])
 	newKeys.push(arr[1])
+	$("#key2").prop("checked", true)
+	keysNumber = 2
 	if(arr.length==3){
 		$('#btnkey3').html(arr[2])
 		newKeys.push(arr[2])
+		$("#key3").prop("checked", true)
+		$('#btnkey3').prop('disabled',false)
+		keysNumber = 3
 	}
 })
 
@@ -54,7 +60,11 @@ $('#confirm').click(function(){
 $('input[type=radio][name=radioKey]').change(function(e) {
 		if(this.id=='key2'){
 			$('#btnkey3').prop('disabled',true)
+			newKeys.pop()
+			keysNumber = 2
 		}else if(this.id=='key3'){
+			newKeys.push(null)
+			keysNumber = 3
 			$('#btnkey3').prop('disabled',false)
 			$('#btnkey3').trigger('click')
 		}
@@ -66,6 +76,9 @@ $('#btnkey1').click(function(){
 	$('#btnkey1').addClass('btn-info')
 	$('#name').prop('disabled',true)
 	$('#file').prop('disabled',true)
+	$('#confirm').prop('disabled',true)
+	$('#btnkey2').prop('disabled',true)
+	$('#btnkey3').prop('disabled',true)
 
 })
 
@@ -74,6 +87,9 @@ $('#btnkey2').click(function(){
 	$('#btnkey2').addClass('btn-info')
 	$('#name').prop('disabled',true)
 	$('#file').prop('disabled',true)
+	$('#confirm').prop('disabled',true)
+	$('#btnkey1').prop('disabled',true)
+	$('#btnkey3').prop('disabled',true)
 
 })
 
@@ -82,6 +98,9 @@ $('#btnkey3').click(function(){
 	$('#btnkey3').addClass('btn-info')
 	$('#name').prop('disabled',true)
 	$('#file').prop('disabled',true)
+	$('#confirm').prop('disabled',true)
+	$('#btnkey2').prop('disabled',true)
+	$('#btnkey1').prop('disabled',true)
 
 })
 
@@ -109,4 +128,9 @@ $('body').keydown(function(e){
 	}
 	$('#name').prop('disabled',false)
 	$('#file').prop('disabled',false)
+	$('#confirm').prop('disabled',false)
+	$('#btnkey1').prop('disabled',false)
+	$('#btnkey2').prop('disabled',false)
+	if(keysNumber==3)
+		$('#btnkey3').prop('disabled',false)
 });
