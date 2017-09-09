@@ -43,7 +43,7 @@ function send(ip){
 }
 
 $('#list').on('click','.send', (e)=>{
-    var x = jQuery(e.currentTarget.attributes.id)
+    var x = $(e.currentTarget.attributes.id)
     send(x[0].value)
 })
 
