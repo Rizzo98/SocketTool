@@ -46,15 +46,13 @@ function send(ip){
         d.copy(lastBuffer,0,tempBuffer.length*100,d.length)
         bufferList.push(lastBuffer)
       }
-      console.log(bufferList)
 
       c=0
       bufferList.forEach((i)=>{
-        socket.emit('prova',{bf:i,index:c,name:NAME,len:bufferList.length})
+        socket.emit('send',{bf:i,index:c,name:NAME,len:bufferList.length})
         c++
       })
 
-      socket.emit('send',{data: d, name: NAME});
       socket.emit('end');
     })
 
