@@ -34,6 +34,26 @@ function send(ip){
 
   socket.on('connect', function(){
     fs.readFile(URL, (err,d) => {
+      tempBuffer = new Buffer(d.length/100)
+      bufferList = []
+      for(i = 0; i<tempBuffer.length*100; i +=tempBuffer.length){
+        d.copy(tempBuffer,0,i,(i+1)*(tempBuffer.length)-1)
+        bufferList.push(tempBuffer)
+        tempBuffer = new Buffer(d.length/100)
+      }
+      lastBuffer = new Buffer(d.length-tempBuffer.length*100)
+      if(tempBuffer.length != 0){
+        d.copy(lastBuffer,0,tempBuffer.length*100,d.length)
+        bufferList.push(lastBuffer)
+      }
+      console.log(bufferList)
+
+      c=0
+      bufferList.forEach((i)=>{
+        socket.emit('prova',{bf:i,index:c,name:NAME,len:bufferList.length})
+        c++
+      })
+
       socket.emit('send',{data: d, name: NAME});
       socket.emit('end');
     })

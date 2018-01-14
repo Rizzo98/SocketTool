@@ -11,8 +11,21 @@ const conf = require('./readConf.js')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let sendingWin
 let shown = false;
 
+
+function createSendingWin(){
+  w = 400
+  h = 150
+  dimensions = electron.screen.getPrimaryDisplay().size
+  sendingWin = new BrowserWindow({width : w, height : h,alwaysOnTop : true, show : true, frame : false, x : dimensions.width, y : dimensions.height})
+  sendingWin.loadURL(url.format({
+    pathname: path.join(__dirname, 'sendingWin/page.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+}
 
 function createWindow () {
   // Create the browser window.
@@ -28,6 +41,8 @@ function createWindow () {
 
   // Open the DevTools.
   win.webContents.openDevTools()
+  createSendingWin()
+  //sendingWin.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
