@@ -1,6 +1,6 @@
 var fs = require('fs');
 var $ = require('jQuery');
-
+var sendingWin = require('./sendingWin/window.js')
 var URL = null
 var NAME = null
 
@@ -48,8 +48,10 @@ function send(ip){
       }
 
       c=0
+      sendingWin.createSendingWin()
       bufferList.forEach((i)=>{
         socket.emit('send',{bf:i,index:c,name:NAME,len:bufferList.length})
+        sendingWin.increment(1)
         c++
       })
 
